@@ -24,11 +24,6 @@ int main()
     char menu;
     List *main_begin = 0,*negative_begin = 0,*positive_begin = 0, *main_end = 0, *positive_end = 0, *negative_end = 0;
 
-/*
-    
-    }
-    */
-
     while(1){
         cout <<"Chose a option: ";
         cin >> menu;
@@ -57,7 +52,6 @@ int main()
             break;
         }
     }
-    
 }
 
 void add_to_list_from_begin(List *&begin, List *&end, int input)
