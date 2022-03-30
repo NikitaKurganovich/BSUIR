@@ -1,0 +1,40 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Launch Lab_1_oop",
+      "request": "launch",
+      "mainClass": "OOPnP.OOP.Lab_1_oop",
+      "projectName": "BSUIR_557506d9"
+    },
+    {
+      "type": "java",
+      "name": "Launch Test",
+      "request": "launch",
+      "mainClass": "OOPaP.Test",
+      "projectName": "BSUIR_557506d9"
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "c:/Users/Bibka/Documents/BSUIR/OAiP/lab3v1",
+      "environment": [],
+      "program": "c:/Users/Bibka/Documents/BSUIR/OAiP/lab3v1/build/Debug/outDebug",
+      "internalConsoleOptions": "openOnSessionStart",
+      "MIMode": "gdb",
+      "miDebuggerPath": "C:/MinGW/bin/gdb.exe",
+      "externalConsole": false,
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}
