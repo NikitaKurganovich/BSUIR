@@ -1,4 +1,4 @@
-package OOPnP.OOP;
+package BSUIR.OOPnP.OOP;
 
 public class Check {
 

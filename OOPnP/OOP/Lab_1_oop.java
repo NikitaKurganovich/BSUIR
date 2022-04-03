@@ -1,4 +1,4 @@
-package OOPnP.OOP;
+package BSUIR.OOPnP.OOP;
 
 import java.util.Scanner;
 import static java.lang.System.exit;

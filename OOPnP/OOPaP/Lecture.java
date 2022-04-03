@@ -1,4 +1,4 @@
-package OOPnP.OOPaP;
+package BSUIR.OOPnP.OOPaP;
 
 import java.util.Scanner;
 
