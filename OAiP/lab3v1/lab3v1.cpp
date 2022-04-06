@@ -14,17 +14,23 @@ void view_from_end(List *p);
 void view_from_begin(List *p);
 void del_all(List *&p);
 void chosing_view(List *mb, List *me, List *nb, List *ne, List *pb, List *pe);
+void direction_selection(List *b, List *e);
+void direction_selection_for_all(List *mb, List *me, List *nb, List *ne, List *pb, List *pe);
 void segregation(List *main, List *&pos, List *&pos_end, List *&neg, List *&neg_end);
 
 using namespace std;
 
 int main()
 {
-    int value, size;
     char menu;
     List *main_begin = 0,*negative_begin = 0,*positive_begin = 0, *main_end = 0, *positive_end = 0, *negative_end = 0;
 
     while(1){
+        cout <<" 1 - create list;" << endl
+            << " 2 - devide list on negative and positive; " << endl
+            << " 3 - add number to main list; " << endl
+            << " 4 - view lists; "<< endl
+            << " e - exit program;" << endl;
         cout <<"Chose a option: ";
         cin >> menu;
         switch (menu)
@@ -33,10 +39,17 @@ int main()
             create_list(main_begin, main_end);
             break;
         case '2':
-            segregation(main_begin,positive_begin, positive_end, negative_begin, negative_end);
-            break;
+            if (positive_begin != 0 || negative_begin != 0)
+            {
+                cout << "Positive, negative or both lists are already exist! Would you like to delete it and make new two list?" << endl;
+                break;
+            } else
+            {
+                segregation(main_begin,positive_begin, positive_end, negative_begin, negative_end);
+                break;
+            }
         case '3':
-           // add_to_list();
+           //add_to_list();
            break;
         case '4':
             chosing_view(main_begin, main_end, negative_begin, negative_end, positive_begin, positive_end);
@@ -265,3 +278,30 @@ void direction_selection_for_all(List *mb, List *me, List *nb, List *ne, List *p
     }
     }
 }
+
+void add_to_list()
+{
+    char menu;
+    while(1){
+        cout <<" 1 - add to end;" << endl
+            << " 2 - add to begin; " << endl
+            << " e - return;" << endl;
+        cout <<"Chose a option: ";
+        cin >> menu;
+        switch (menu)
+        {
+        case '1':
+            
+            break;
+        case '2':
+            
+            break;
+        case 'e': 
+            return;
+        default:
+            cout << "Entre a value between 1, 2 or e!" << endl;
+            break;
+        }
+    }
+}
+

@@ -14,12 +14,6 @@ public class Client {
         checks = new ArrayList<>();
     }
 
-    public Client(String name,int checkAmount, List<Check> checks){
-        this.name = name;
-        this.checkAmount = checkAmount;
-        this.checks = checks;
-    }
-
     public String getName(){
         return name;
     }
