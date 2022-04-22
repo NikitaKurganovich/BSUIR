@@ -1,0 +1,2 @@
+admin ps|x} admin active
+ebin dfssd admin active
