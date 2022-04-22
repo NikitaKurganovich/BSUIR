@@ -59,7 +59,7 @@ public class Lab_1_oop {
         String clientName = checkingClientInfo(scanner);
         System.out.println("Entre a client's check amount: ");
 
-        int checkAmount = scanner.nextInt();
+        int checkAmount = numberValidation(scanner);
         Client client = new Client(clientName, checkAmount);
 
         for(int i = 0; i < checkAmount; i++){
@@ -68,7 +68,7 @@ public class Lab_1_oop {
             String checkNumber = checkingCheckInfo(scanner);
 
             System.out.println("Entre a check balance: ");
-            int checkBalance = scanner.nextInt();
+            int checkBalance = numberValidation(scanner);
 
             Check check = new Check(checkBalance, checkNumber, client);
             client.addCheckToClient(check);
@@ -110,7 +110,7 @@ public class Lab_1_oop {
         String ownerName = checkingClientInfo(scanner);
         System.out.println("Entre a client's check amount: ");
 
-        int checkAmount = scanner.nextInt();
+        int checkAmount = numberValidation(scanner);
 
         Client owner = new Client(ownerName, checkAmount);
 
@@ -140,7 +140,7 @@ public class Lab_1_oop {
 
     private static void addCheckToClient(Scanner scanner){
         System.out.println("Adding a check to client. Entre a client's name: ");
-        String clientName = checkingClientInfo(scanner);
+        String clientName = scanner.nextLine();
 
         for(Client client: bank.getClientList()){
           
@@ -153,7 +153,10 @@ public class Lab_1_oop {
     
                 Check check = new Check(checkBalance, checkNumber, client);
                 client.addCheckToClient(check);
+                client.setCheckAmount(client.getCheckAmount() + 1);
+                return;
             }
+            System.out.println("Client with this name wasn't found!");
         }
     }
 
@@ -240,11 +243,27 @@ public class Lab_1_oop {
 
         for(Check check: bank.getChecksList()){
             if(check.getNumber().equals(checkName)){
-                System.out.println("This check is belong to " + check.getOwner().getName());
+                System.out.println("This check is belong to " + check.getOwner().getName() + " and have " + check.getBalance() + " on balance");
+                return;
             }
         }
+        System.out.println("Check with name wasn't found!");
     }
 
+
+    private static int numberValidation( Scanner scanner){
+        int temp;
+        while(true){
+            try{
+                temp = Integer.parseInt(scanner.next());
+                break;
+            }
+            catch(Exception ex){
+                System.out.println("Entre a number! ");
+            }
+        }
+        return temp;
+    }
     static String TextForSum1 = "Summing all checks";
     static String TextForSum2 = " in all checks";
     static String TextForNeg1 = "Summing negative checks";
