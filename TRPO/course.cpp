@@ -2,13 +2,23 @@
 #include <fstream>
 #include <string>
 #include <conio.h>
+#include <cstring>
 
 using namespace std;
+
+struct account
+{
+    string login, password, access, role;
+};
+
 
 void create_file();
 char decription(char symbol);
 char encription(char symbol);
-bool searching_login(string login);
+account searching_login(string login);
+string string_encription(string text);
+string string_decription(string text);
+void input_password(string text);
 
 int main()
 {
@@ -22,11 +32,12 @@ int main()
     
     cout << "Entre a login: ";
     cin >> login;
-    if (searching_login(login) == false)
+    account user = searching_login(login);
+    if(user.login != "")
     {
-        cout << "This account doesn't exist! " << endl;
+        cout << "Entre a password: ";
+        input_password(password);
     }
-
     _getch();
     return 0;
 }
@@ -34,42 +45,63 @@ int main()
 void create_file()
 {
     ofstream accounts("Accounts.txt");
-    char temp;
-    string passworld;
-    temp = encription('a');
-    passworld += temp;
-    temp = encription('d');
-    passworld += temp;
-    temp = encription('m');
-    passworld += temp;
-    temp = encription('i');
-    passworld += temp;
-    temp = encription('n');
-    passworld += temp;
+    string passworld = string_encription("admin");
     accounts << "admin" << " " << passworld << " " << "admin" << " " << "active";
 }
 
 char encription(char symbol)
 {
-    int temp = (int)(symbol);
-    return (char)(temp + 15);
+    return (char)(int(symbol) + 15);
 }
 
 char decription(char symbol)
 {
-    int temp = (int)(symbol);
-    return (char)(temp - 15);
+    return (char)(int(symbol) - 15);
 }
 
-bool searching_login(string login)
+account searching_login(string login)
 { 
     ifstream file("Accounts.txt");
-    string file_login, file_password, file_access, file_role;
+    account user;
     while(!file.eof())
     {
-        file_login = "";
-        file >> file_login >> file_password >> file_role >> file_access;
-        if (file_login == login) return true;
+        
+        user.login = user.password = user.role = user.access = "";
+        file >> user.login >> user.password >> user.role >> user.access;
+        if (user.login == login) return user;
     }
-    return false;
+    cout << "This account doesnt exist!" << endl;
+    user.login = user.password = user.role = user.access = "";
+    return user;
 }
+
+string string_encription(string text)
+{
+    for(int i = 0; i < text.length(); i++)
+    {
+        text[i] = encription(text[i]);
+    }
+    return text;
+}
+
+string string_decription(string text)
+{
+    for(int i = 0; i < text.length(); i++)
+    {
+        text[i] = decription(text[i]);
+    }
+    return text;
+}
+
+void input_password(string text)
+{
+    int index = 0;
+	for (index = 0; text[index] != '\0'; index++)
+	{
+		text[index] = _getch();
+		if (text[index] == 13) break;
+		cout << "*";
+	}
+	text[index] = '\0';
+}
+
