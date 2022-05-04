@@ -3,6 +3,8 @@
 #include <string>
 #include <conio.h>
 #include <cstring>
+#include <vector>
+#include <sha256.h>
 
 using namespace std;
 
@@ -12,96 +14,106 @@ struct account
 };
 
 
-void create_file();
-char decription(char symbol);
-char encription(char symbol);
+const string USER_FILE = "Acconts.txt";
+const string DEFAULT_USER_STRING = "admin 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918 admin active";
+
+void create_file(string FILE_NAME, string DEAFAULT_STRING);
+void check_file(string FILE_NAME, string DEFAULT_STRING);
+
 account searching_login(string login);
-string string_encription(string text);
-string string_decription(string text);
-void input_password(string text);
+account authorization_and_authentication();
+account access_to_system();
+
+string input_password();
+
 
 int main()
 {
-    string login, password, access, role, file_login, file_password, file_access, file_role;
-    ifstream accounts("Accounts.txt");
-    if (!accounts.is_open())
-    {
-        cout << "File doesn't exist! File with standart admin account will be created! " << endl;
-        create_file();
-    }
     
-    cout << "Entre a login: ";
-    cin >> login;
-    account user = searching_login(login);
-    if(user.login != "")
-    {
-        cout << "Entre a password: ";
-        input_password(password);
-    }
-    _getch();
+    
     return 0;
 }
 
-void create_file()
+void create_file(string FILE_NAME, string DEAFAULT_STRING)
 {
-    ofstream accounts("Accounts.txt");
-    string passworld = string_encription("admin");
-    accounts << "admin" << " " << passworld << " " << "admin" << " " << "active";
+    ofstream file(FILE_NAME);
+    file << DEAFAULT_STRING;
 }
 
-char encription(char symbol)
-{
-    return (char)(int(symbol) + 15);
-}
-
-char decription(char symbol)
-{
-    return (char)(int(symbol) - 15);
-}
-
-account searching_login(string login)
+account authorization_and_authentication()
 { 
+    check_file(USER_FILE, DEFAULT_USER_STRING);
     ifstream file("Accounts.txt");
     account user;
-    while(!file.eof())
+    string login, password;
+    while(true)
     {
-        
-        user.login = user.password = user.role = user.access = "";
-        file >> user.login >> user.password >> user.role >> user.access;
-        if (user.login == login) return user;
+        cout << "Entre a login: ";
+        cin >> login;
+        cout << "Entre a password: ";
+        password = input_password();
+        while(!file.eof())
+        {
+            user.login = user.password = user.role = user.access = "";
+            file >> user.login >> user.password >> user.role >> user.access;
+            if (user.login == login && user.password == password) return user;
+        }
+        cout << "Incorrect login or password!" << endl;
     }
-    cout << "This account doesnt exist!" << endl;
-    user.login = user.password = user.role = user.access = "";
-    return user;
 }
 
-string string_encription(string text)
+string input_password()
 {
-    for(int i = 0; i < text.length(); i++)
+    string pass;
+    char ch;
+    while(true)
     {
-        text[i] = encription(text[i]);
+        ch = _getch();
+        if(ch == 13) break;
+        if(ch == 8) 
+        {
+            if(pass.length() > 0)
+            {
+            cout <<"\b \b";
+            pass.erase(pass.end() - 1);
+            }
+        }
+        else 
+        {
+            cout << '*';
+            pass.push_back(ch);
+        }
     }
-    return text;
+    return sha256(pass);
 }
 
-string string_decription(string text)
+void check_file(string FILE_NAME, string DEFAULT_STRING)
 {
-    for(int i = 0; i < text.length(); i++)
+    ifstream file(FILE_NAME);
+    if (!file.is_open())
     {
-        text[i] = decription(text[i]);
+        cout << "File doesn't exist! Standart file will be created! " << endl;
+        create_file(FILE_NAME, DEFAULT_STRING);
     }
-    return text;
 }
 
-void input_password(string text)
+void task(account user)
 {
-    int index = 0;
-	for (index = 0; text[index] != '\0'; index++)
-	{
-		text[index] = _getch();
-		if (text[index] == 13) break;
-		cout << "*";
-	}
-	text[index] = '\0';
+
+
+}
+
+account access_to_system()
+{
+    while(true)
+    {
+        account user = authorization_and_authentication();
+        if (user.access == "denied")
+        {
+        cout << "Access denied! Admin have to confirm your account. Press any button to return" << endl;
+        continue;
+        }
+        return user;
+    }
 }
 
