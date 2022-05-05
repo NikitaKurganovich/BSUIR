@@ -5,6 +5,8 @@
 #include <cstring>
 #include <vector>
 #include <sha256.h>
+#include <iomanip>
+#include <ios>
 
 using namespace std;
 
@@ -14,7 +16,7 @@ struct account
 };
 
 
-const string USER_FILE = "Acconts.txt";
+const string USER_FILE = "Accounts.txt";
 const string DEFAULT_USER_STRING = "admin 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918 admin active";
 
 void create_file(string FILE_NAME, string DEAFAULT_STRING);
@@ -29,7 +31,7 @@ string input_password();
 
 int main()
 {
-    
+    account user = access_to_system();
     
     return 0;
 }
@@ -52,13 +54,20 @@ account authorization_and_authentication()
         cin >> login;
         cout << "Entre a password: ";
         password = input_password();
+        file.seekg(0 ,ios_base::beg);
         while(!file.eof())
         {
             user.login = user.password = user.role = user.access = "";
             file >> user.login >> user.password >> user.role >> user.access;
-            if (user.login == login && user.password == password) return user;
+            if (user.login == login && user.password == password) 
+            {
+                system("CLS");
+                cout << "You entred to system!" << endl;
+                return user;
+            }
         }
-        cout << "Incorrect login or password!" << endl;
+        system("CLS");
+        cout << endl << "Incorrect login or password!" << endl;
     }
 }
 
@@ -110,10 +119,47 @@ account access_to_system()
         account user = authorization_and_authentication();
         if (user.access == "denied")
         {
-        cout << "Access denied! Admin have to confirm your account. Press any button to return" << endl;
-        continue;
+            cout << endl << "Access denied! Admin have to confirm this account." << endl;
+            cout << left << setfill(' ') << setw(10) << "Option" << "Function" << endl;
+            cout << left << setfill(' ') << setw(10) << 1 << "- try login with another account" << endl;
+            cout << left << setfill(' ') << setw(10) << 2 << "- exit program" << endl;
+            while (true)
+            {
+                char input = getch();
+                if (input == '1') break;
+                if (input == '2')
+                {
+                    account NULL_USER; 
+                    NULL_USER.access = "NULL";
+                    return NULL_USER;
+                }
+                
+            }
+            continue;
         }
         return user;
     }
 }
 
+void registration()
+{
+    check_file(USER_FILE, DEFAULT_USER_STRING);
+    ifstream file("Accounts.txt");
+    account user;
+    string login;
+    while (true)
+    {
+    cout << "Entre a login: ";
+    cin >> login;
+    while(!file.eof())
+        {
+            user.login = user.password = user.role = user.access = "";
+            file >> user.login >> user.password >> user.role >> user.access;
+            if (user.login == login ) 
+            {
+                system("CLS");
+                cout << "This login is taken!" << endl;
+            }
+        }
+    }
+}
