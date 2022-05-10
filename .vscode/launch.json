@@ -12,7 +12,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "gdb",
-      "miDebuggerPath": "C:\\Programs\\msys64\\mingw64\\bin\\gdb.exe",
+      "miDebuggerPath": "C:\\mingw\\bin\\gdb.exe",
       "setupCommands": [
         {
           "description": "Enable pretty-printing for gdb",
@@ -29,13 +29,13 @@
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
-      "cwd": "c:/Users/Bibka/Documents/BSUIR/OAiP/lab3v1",
+      "cwd": "c:/Users/Bibka/Documents/BSUIR/OAiP/Lab4v1",
       "environment": [],
-      "program": "c:/Users/Bibka/Documents/BSUIR/OAiP/lab3v1/build/Debug/outDebug",
+      "program": "c:/Users/Bibka/Documents/BSUIR/OAiP/Lab4v1/build/Debug/outDebug",
       "internalConsoleOptions": "openOnSessionStart",
       "MIMode": "gdb",
       "miDebuggerPath": "C:/MinGW/bin/gdb.exe",
-      "externalConsole": false,
+      "console": "integratedTerminal",
       "setupCommands": [
         {
           "description": "Enable pretty-printing for gdb",

@@ -18,26 +18,17 @@ char encription(char symbol);
 account searching_login(string login);
 string string_encription(string text);
 string string_decription(string text);
-void input_password(string text);
+string input_password();
 
 int main()
 {
     string login, password, access, role, file_login, file_password, file_access, file_role;
+    check_file();
     ifstream accounts("Accounts.txt");
-    if (!accounts.is_open())
-    {
-        cout << "File doesn't exist! File with standart admin account will be created! " << endl;
-        create_file();
-    }
-    
-    cout << "Entre a login: ";
-    cin >> login;
-    account user = searching_login(login);
-    if(user.login != "")
-    {
-        cout << "Entre a password: ";
-        input_password(password);
-    }
+    account user = login();
+
+
+
     _getch();
     return 0;
 }
@@ -93,15 +84,37 @@ string string_decription(string text)
     return text;
 }
 
-void input_password(string text)
+string input_password()
 {
-    int index = 0;
-	for (index = 0; text[index] != '\0'; index++)
+    string text;
+	int i=0;
+	while(true)
 	{
-		text[index] = _getch();
-		if (text[index] == 13) break;
-		cout << "*";
+		text[i]=_getch();
+        if(text[i] == 13) break;
+        if(text[i] == 8 && text.length() > 0)
+        {
+            cout << '\b' <<" "<< '\b';
+        }
+        else cout << "*";
+        i++;
 	}
-	text[index] = '\0';
+    cout << endl;
+	return text;
 }
 
+void check_file()
+{
+    ifstream accounts("Accounts.txt");
+    if (!accounts.is_open())
+    {
+        cout << "File doesn't exist! File with standart admin account will be created! " << endl;
+        create_file();
+    }
+}
+
+account login()
+{
+    account user;
+    return user;
+}

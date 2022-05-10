@@ -4,7 +4,7 @@
         {
             "type": "shell",
             "label": "g++.exe build active file",
-            "command": "C:/Programs/msys64/mingw64/bin/g++.exe",
+            "command": "C:/mingw/bin/g++.exe",
             "args": [
                 "-std=c++17",
                 "-g",
@@ -13,7 +13,7 @@
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
             "options": {
-                "cwd": "C:\\Programs\\msys64\\mingw64\\bin"
+                "cwd": "C:\\mingw\\bin"
             },
             "problemMatcher": [
                 "$gcc"

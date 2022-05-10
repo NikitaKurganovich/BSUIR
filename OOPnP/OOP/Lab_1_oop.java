@@ -1,5 +1,8 @@
 package BSUIR.OOPnP.OOP;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Scanner;
 import static java.lang.System.exit;
 
@@ -16,6 +19,22 @@ public class Lab_1_oop {
 
     public static void main(String[] args){
         bank = new Bank();
+        File clientList = new File(CLIENT_FILE_DIRECTION);
+        File checkList = new File(CHECKS_FILE_DIRECTION);
+        if(!checkList.exists() || !clientList.exists()){
+            System.out.print("One or both files aren't exist! Both files will be created in standart directories!");
+            clientList.createNewFile(CLIENT_FILE_DIRECTION);
+            checkList.createNewFile(CHECKS_FILE_DIRECTION);
+        }
+
+        FileReader clientFileScan= new FileReader(CLIENT_FILE_DIRECTION);
+        Scanner scan = new Scanner(clientFileScan);
+
+        FileReader checksFileScan= new FileReader(CHECKS_FILE_DIRECTION);
+        Scanner scan = new Scanner(checksFileScan);
+
+
+
 
         String[] options = {"1 - add client",
                             "2 - print all clients from bank",
@@ -50,6 +69,8 @@ public class Lab_1_oop {
                 scanner.nextLine();
             }
         }
+        checksFileScan.close();
+        clientFileScan.close();
         scanner.close();
     }
    
@@ -259,11 +280,36 @@ public class Lab_1_oop {
                 break;
             }
             catch(Exception ex){
-                System.out.println("Entre a number! ");
+                System.out.println("Entre a number!");
             }
         }
         return temp;
     }
+
+    private static void addToClientFile(Client client){
+        FileWriter ClientFile = new FileWriter(CLIENT_FILE_DIRECTION);
+        ClientFile.write(client.getName() + " " + client.getCheckAmount());
+        ClientFile.close();
+    }
+
+    private static void readFromClientFile(){
+        
+    }
+
+    private static void addToCheckFile(){
+        FileWriter ChecksFile = new FileWriter(CHECKS_FILE_DIRECTION);
+        ChecksFile.write(check.getNumber() + " " + check.getBalance() + " " + check.getOwner().getName());
+        ChecksFile.close();
+        }
+
+    private static void readFromCheckFile(Check check){
+        
+    }
+
+
+
+    static String CHECKS_FILE_DIRECTION = "C://Users//Bibka//Documents//OOP//Checks.txt";
+    static String CLIENT_FILE_DIRECTION = "C://Users//Bibka//Documents//OOP//Clients.txt";
     static String TextForSum1 = "Summing all checks";
     static String TextForSum2 = " in all checks";
     static String TextForNeg1 = "Summing negative checks";
