@@ -3,6 +3,10 @@
 #include <string>
 #include <conio.h>
 #include <cstring>
+#include <vector>
+#include <sha256.h>
+#include <iomanip>
+#include <ios>
 
 using namespace std;
 
@@ -11,16 +15,30 @@ struct account
     string login, password, access, role;
 };
 
+struct member
+{
+    string surname, name, lastname, country, instrument;
+    int birth_year, place;
+};
 
-void create_file();
-char decription(char symbol);
-char encription(char symbol);
+
+const string USER_FILE = "Accounts.txt";
+const string DEFAULT_USER_STRING = "admin 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918 admin active";
+const string MAIN_FILE = "Concert.txt";
+const string DEFAULT_MAIN_FILE_STRING = "Ivanov Ivan Ivanovich 2001 Belarus piano 1";
+
+void create_file(string FILE_NAME, string DEAFAULT_STRING);
+void check_file(string FILE_NAME, string DEFAULT_STRING);
+
 account searching_login(string login);
 string string_encription(string text);
 string string_decription(string text);
 string input_password();
 
-int main()
+string input_password();
+
+
+void main()
 {
     string login, password, access, role, file_login, file_password, file_access, file_role;
     check_file();
@@ -33,55 +51,100 @@ int main()
     return 0;
 }
 
-void create_file()
+void menu(account user)
 {
-    ofstream accounts("Accounts.txt");
-    string passworld = string_encription("admin");
-    accounts << "admin" << " " << passworld << " " << "admin" << " " << "active";
+    switch (hash_value(user.role))
+    {
+    case ct_hash("admin"):
+        admin_menu();
+        return;
+    case ct_hash("viewer"):
+        viewer_menu();
+        return;
+    default:
+        return;
+    }
 }
 
-char encription(char symbol)
+void registration()
 {
-    return (char)(int(symbol) + 15);
-}
-
-char decription(char symbol)
-{
-    return (char)(int(symbol) - 15);
-}
-
-account searching_login(string login)
-{ 
+    check_file(USER_FILE, DEFAULT_USER_STRING);
     ifstream file("Accounts.txt");
     account user;
+    string login;
+    while (true)
+    {
+    cout << "Entre a login: ";
+    cin >> login;
     while(!file.eof())
-    {
-        
-        user.login = user.password = user.role = user.access = "";
-        file >> user.login >> user.password >> user.role >> user.access;
-        if (user.login == login) return user;
+        {
+            user.login = user.password = user.role = user.access = "";
+            file >> user.login >> user.password >> user.role >> user.access;
+            if (user.login == login ) 
+            {
+                system("CLS");
+                cout << "This login is taken!" << endl;
+            }
+        }
     }
-    cout << "This account doesnt exist!" << endl;
-    user.login = user.password = user.role = user.access = "";
-    return user;
 }
 
-string string_encription(string text)
-{
-    for(int i = 0; i < text.length(); i++)
+account authorization_and_authentication()
+{ 
+    check_file(USER_FILE, DEFAULT_USER_STRING);
+    ifstream file("Accounts.txt");
+    account user;
+    string login, password;
+    while(true)
     {
-        text[i] = encription(text[i]);
+        cout << "Entre a login: ";
+        cin >> login;
+        cout << "Entre a password: ";
+        password = input_password();
+        file.seekg(0 ,ios_base::beg);
+        while(!file.eof())
+        {
+            user.login = user.password = user.role = user.access = "";
+            file >> user.login >> user.password >> user.role >> user.access;
+            if (user.login == login && user.password == password) 
+            {
+                system("CLS");
+                cout << "You entred to system!" << endl;
+                return user;
+            }
+        }
+        system("CLS");
+        cout << endl << "Incorrect login or password!" << endl;
     }
-    return text;
 }
 
-string string_decription(string text)
+string input_password()
 {
-    for(int i = 0; i < text.length(); i++)
+    string pass;
+    char ch;
+    while(true)
     {
-        text[i] = decription(text[i]);
+        ch = _getch();
+        if(ch == 13)
+        {
+            if (pass.length() > 4) break;
+            else continue;
+        }
+        if(ch == 8) 
+        {
+            if(pass.length() > 0)
+            {
+            cout <<"\b \b";
+            pass.erase(pass.end() - 1);
+            }
+        }
+        else 
+        {
+            cout << '*';
+            pass.push_back(ch);
+        }
     }
-    return text;
+    return sha256(pass);
 }
 
 string input_password()
