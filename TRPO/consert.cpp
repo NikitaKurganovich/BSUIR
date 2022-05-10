@@ -7,9 +7,14 @@ using namespace std;
 struct member
 {
     string surname, name, lastname, country, instrument;
-    int birth_year, place;  
+    int birth_year, place;
 };
-    
+
+const string USER_FILE = "Accounts.txt";
+const string DEFAULT_USER_STRING = "admin 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918 admin active";
+const string MAIN_FILE = "Concert.txt";
+const string DEFAULT_MAIN_FILE_STRING = "Ivanov Ivan Ivanovich 2001 Belarus piano 1";
+
 string input_name();
 
 int main ()
@@ -94,3 +99,20 @@ string input_name()
         }
     }
 }
+
+void check_file(string FILE_NAME, string DEFAULT_STRING)
+{
+    ifstream file(FILE_NAME);
+    if (!file.is_open())
+    {
+        cout << "File doesn't exist! Standart file will be created! " << endl;
+        create_file(FILE_NAME, DEFAULT_STRING);
+    }
+}
+
+void create_file(string FILE_NAME, string DEAFAULT_STRING)
+{
+    ofstream file(FILE_NAME);
+    file << DEAFAULT_STRING;
+}
+

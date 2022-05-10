@@ -15,13 +15,6 @@ struct account
     string login, password, access, role;
 };
 
-struct member
-{
-    string surname, name, lastname, country, instrument;
-    int birth_year, place;
-};
-
-
 const string USER_FILE = "Accounts.txt";
 const string DEFAULT_USER_STRING = "admin 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918 admin active";
 const string MAIN_FILE = "Concert.txt";
@@ -40,15 +33,9 @@ string input_password();
 
 void main()
 {
-    string login, password, access, role, file_login, file_password, file_access, file_role;
-    check_file();
-    ifstream accounts("Accounts.txt");
-    account user = login();
-
-
 
     _getch();
-    return 0;
+    return;
 }
 
 void menu(account user)
@@ -147,37 +134,39 @@ string input_password()
     return sha256(pass);
 }
 
-string input_password()
+void check_file(string FILE_NAME, string DEFAULT_STRING)
 {
-    string text;
-	int i=0;
-	while(true)
-	{
-		text[i]=_getch();
-        if(text[i] == 13) break;
-        if(text[i] == 8 && text.length() > 0)
-        {
-            cout << '\b' <<" "<< '\b';
-        }
-        else cout << "*";
-        i++;
-	}
-    cout << endl;
-	return text;
-}
-
-void check_file()
-{
-    ifstream accounts("Accounts.txt");
-    if (!accounts.is_open())
+    ifstream file(FILE_NAME);
+    if (!file.is_open())
     {
-        cout << "File doesn't exist! File with standart admin account will be created! " << endl;
-        create_file();
+        cout << "File doesn't exist! Standart file will be created! " << endl;
+        create_file(FILE_NAME, DEFAULT_STRING);
     }
 }
 
-account login()
+void create_file(string FILE_NAME, string DEAFAULT_STRING)
 {
-    account user;
-    return user;
+    ofstream file(FILE_NAME);
+    file << DEAFAULT_STRING;
 }
+
+constexpr size_t ct_hash_suffix(char c, size_t seed)
+{
+    return static_cast<size_t>(c) + 0x9e3779b9ul + (seed << 6) + (seed >> 2);
+}
+
+size_t hash_value(string const & str)
+{
+    size_t seed = 0;
+    for(char c : str)
+    {
+        seed ^= ct_hash_suffix(c, seed);
+    }
+    return seed;
+}
+
+constexpr size_t ct_hash(char const * str, size_t seed = 0)
+{
+    return *str ? ct_hash(str + 1, seed ^ ct_hash_suffix(*str, seed)) : seed;
+}
+
