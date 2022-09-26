@@ -15,6 +15,16 @@ struct account
     string login, password, access, role;
 };
 
+<<<<<<< HEAD
+=======
+struct member
+{
+    string surname, name, lastname, country, instrument;
+    int birth_year, place;
+};
+
+
+>>>>>>> 5762bd4a930995ca7fb23673738a16d221a5a1bd
 const string USER_FILE = "Accounts.txt";
 const string DEFAULT_USER_STRING = "admin 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918 admin active";
 const string MAIN_FILE = "Concert.txt";
@@ -103,6 +113,38 @@ account authorization_and_authentication()
         system("CLS");
         cout << endl << "Incorrect login or password!" << endl;
     }
+<<<<<<< HEAD
+=======
+}
+
+string input_password()
+{
+    string pass;
+    char ch;
+    while(true)
+    {
+        ch = _getch();
+        if(ch == 13)
+        {
+            if (pass.length() > 4) break;
+            else continue;
+        }
+        if(ch == 8) 
+        {
+            if(pass.length() > 0)
+            {
+            cout <<"\b \b";
+            pass.erase(pass.end() - 1);
+            }
+        }
+        else 
+        {
+            cout << '*';
+            pass.push_back(ch);
+        }
+    }
+    return sha256(pass);
+>>>>>>> 5762bd4a930995ca7fb23673738a16d221a5a1bd
 }
 
 string input_password()
