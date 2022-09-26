@@ -1,4 +1,4 @@
-package OOPnP.Lab;
+package BSUIR.OOPnP.Lab;
 
 public class Customer{
     private String name;

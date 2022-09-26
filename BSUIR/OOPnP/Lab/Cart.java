@@ -1,4 +1,4 @@
-package OOPnP.Lab;
+package BSUIR.OOPnP.Lab;
 
 import java.util.List;
 
@@ -16,5 +16,5 @@ public class Cart {
     
     
 }
-// dog cat dolphin shark bear deer
+
 

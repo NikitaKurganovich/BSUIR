@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Scanner;
+
 import static java.lang.System.exit;
 
 public class Lab_1_oop {
@@ -23,8 +24,8 @@ public class Lab_1_oop {
         File checkList = new File(CHECKS_FILE_DIRECTION);
         if(!checkList.exists() || !clientList.exists()){
             System.out.print("One or both files aren't exist! Both files will be created in standart directories!");
-            clientList.createNewFile(CLIENT_FILE_DIRECTION);
-            checkList.createNewFile(CHECKS_FILE_DIRECTION);
+            clientList.createNewFile();
+            checkList.createNewFile();
         }
 
         FileReader clientFileScan= new FileReader(CLIENT_FILE_DIRECTION);

@@ -1,6 +1,7 @@
-package OOPnP.Lab;
+package BSUIR.OOPnP.Lab;
 
 import java.util.List;
+
 
 public class Shop {
     private List<Toy> assortment;
