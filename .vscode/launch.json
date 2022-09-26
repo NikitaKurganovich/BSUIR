@@ -2,6 +2,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "Launch LabShop",
+      "request": "launch",
+      "mainClass": "BSUIR.OOPnP.Lab.LabShop",
+      "projectName": "BSUIR_557506d9"
+    },
+    {
       "name": "g++.exe build and debug active file",
       "type": "cppdbg",
       "request": "launch",

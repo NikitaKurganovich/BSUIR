@@ -1,4 +1,5 @@
-package BSUIR.OOPnP.OOP
+package BSUIR.OOPnP.OOP;
+
 public class Check {
 
 private int balance;
