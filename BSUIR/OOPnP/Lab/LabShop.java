@@ -1,83 +1,70 @@
 package BSUIR.OOPnP.Lab;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
+import java.io.File;;
 
 public class LabShop{
-    
+
+    static String[] options = {
+    "1 - add customer",
+    "2 - print all customer and carts",
+    "3 - add toy to any customer's cart",
+    "4 - all carts sum",
+    "5 - print all assortment",
+    "0 - exit",
+};
+
     public static void main(String[] args){
+        Shop shop;
+        File shopFile = new File(Constants.SHOP_FILE_DIRECTION);
 
-        Toy smallCat = new Toy("small", "cat");
-        Toy mediumCat = new Toy("medium", "cat");
-        Toy bigCat = new Toy("big", "cat");
+        if(!shopFile.exists()){
+            System.out.println("Customers list doesn't exist! Standart one will be created");
+            shop = FileMethods.createShopFile();
+        }
+        shop = FileMethods.shopDeserialization();
 
-        Toy smallDog = new Toy("small", "dog");
-        Toy mediumDog = new Toy("medium", "dog");
-        Toy bigDog = new Toy("big", "dog");
+        Scanner scanner = new Scanner(System.in);
+        int option = 1;
 
-        Toy smallShark = new Toy("small", "shark");
-        Toy mediumShark = new Toy("medium", "shark");
-        Toy bigShark = new Toy("big","shark");
+        while(option != 0){
+            Methods.printMenu(options);
+            try{
+                option = scanner.nextInt();
+                scanner.nextLine();
+                switch(option){
+                    case 1:  Methods.addCustomer(scanner, shop); 
+                            FileMethods.serializeShop(shop);
+                            System.out.println(" "); 
+                            break;
+                    case 2:  shop.printCustomersAndCarts(); 
+                            System.out.println(" ");
+                            break;
+                    case 3:  Methods.addToyToCustomer(scanner, shop);
+                            FileMethods.serializeShop(shop);
+                            System.out.println(" "); 
+                            break;
+                    case 4:  shop.printCartsPrices();
+                             System.out.println(" ");
+                             break;
+                    case 5:  Methods.printPrices(shop.getAssortment());
+                            System.out.println(" ");
+                            break;
+                    case 0: System.exit(0);
+                }
+            }
+            catch(Exception ex){
+                System.out.println("Please, entre a value between 1 and " + options.length);
+                scanner.nextLine();
+            }
+        }
+        scanner.close();
+        
+       
 
-        Toy smallDolphin = new Toy("small", "dolphin");
-        Toy mediumDolphin = new Toy("medium", "dolphin");
-        Toy bigDolphin = new Toy("big","dolphin");
+    
 
-        Toy smallBear = new Toy("small", "bear");
-        Toy mediumBear = new Toy("medium", "bear");
-        Toy bigBear = new Toy("big","bear");
-
-        Toy smallDeer = new Toy("small", "deer");
-        Toy mediumDeer = new Toy("medium", "deer");
-        Toy bigDeer = new Toy("big","deer");
-
-        List<Toy> assortment = new ArrayList<Toy>(){{
-            add(smallCat); add(mediumCat); add(bigCat);
-            add(smallDog); add(mediumDog); add(bigDog);
-            add(smallShark);add(mediumShark); add(bigShark);
-            add(smallDolphin);add(mediumDolphin); add(bigDolphin);
-            add(smallBear);add(mediumBear); add(bigBear);
-            add(smallDeer);add(mediumDeer); add(bigDeer);
-        }};
-
-        List<Toy> PetrovList = new ArrayList<Toy>(){{
-            add(smallBear);
-            add(bigShark);
-        }};
-
-        List<Toy> IvanovList = new ArrayList<Toy>(){{
-            add(bigDeer); 
-            add(mediumShark);
-            add(bigDog);
-        }};
-
-        List<Toy> KurganovichList = new ArrayList<Toy>(){{
-            add(smallDolphin);
-            add(smallCat);
-            add(smallShark);
-        }};
-
-        Cart PetrovCart = new Cart(PetrovList);
-        Cart IvanovCart = new Cart(IvanovList);
-        Cart KurganovichCart = new Cart(KurganovichList);
-
-        Customer Petrov = new Customer("Petrov", PetrovCart);
-        Customer Ivanov  = new Customer("Ivanov", IvanovCart);
-        Customer Kurganovich = new Customer("Kurganovich", KurganovichCart);
-
-        List<Customer> customers = new ArrayList<Customer>(){{
-            add(Petrov);
-            add(Ivanov);
-            add(Kurganovich);
-        }};
-
-        Shop toyShop = new Shop(assortment, customers);
-        toyShop.printPrices();
-        //  for(Toy animal : assortment) System.out.print("Price for " 
-        // + animal.getSize() + " " + animal.getType() + 
-        // " is " + animal.toyPrice.calculatePrice(animal.getSize(), animal.getType()) + "\n");
-
-    }
+   }
     
 }
 
