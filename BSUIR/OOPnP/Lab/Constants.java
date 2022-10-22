@@ -61,13 +61,17 @@ public class Constants implements Serializable{
         "3 - add toy to any customer's cart",
         "4 - all carts sum",
         "5 - print all assortment",
+        "6 - sort list of customers",
         "0 - exit",
     };
+
     static String[] sizes = {
     "1 - small",
     "2 - medium",
     "3 - big",
     };
+
+
     static String[] types = {
     "1 - cat",
     "2 - dog",
@@ -76,4 +80,9 @@ public class Constants implements Serializable{
     "5 - bear",
     "6 - deer",
     };
+
+    static String[] sorts = {
+        "1 - Alphabetical order",
+        "2 - Reverse-alphabetical order",
+        };
 }

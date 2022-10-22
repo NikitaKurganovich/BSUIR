@@ -17,6 +17,8 @@ public class LabShop{
         shop = FileMethods.shopDeserialization();
 
         SubThreadSerialize serialize = new SubThreadSerialize(shop);
+        SubThreadSort sort = new SubThreadSort(shop);
+        SubThreadReverseSort reverseSort = new SubThreadReverseSort(shop);
 
         Scanner scanner = new Scanner(System.in);
         int option = 1;
@@ -32,7 +34,6 @@ public class LabShop{
                             System.out.println(" "); 
                             break;
                     case 2:  shop.printCustomersAndCarts(); 
-                            System.out.println(" ");
                             break;
 
                     case 3: Methods.addToyToCustomer(scanner, shop);
@@ -44,6 +45,8 @@ public class LabShop{
                              break;
                     case 5:  Methods.printPrices(shop.getAssortment());
                             System.out.println(" ");
+                            break;
+                    case 6: Methods.chooseSortType(scanner, sort, reverseSort);
                             break;
                     case 0: System.exit(0);
                 }

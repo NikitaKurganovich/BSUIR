@@ -64,7 +64,9 @@ public class Shop implements Serializable{
             System.out.println(cust.getName() + " has in their cart \n");
             for(Toy toy: cust.getCustomerCart().getCustomerCart()){
                 System.out.println("A " + toy.getSize() + " " + toy.getType());
+                
             }
+            System.out.println();
         } 
     }
 

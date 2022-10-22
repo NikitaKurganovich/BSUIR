@@ -169,6 +169,26 @@ public interface Methods {
         }
     }
     
-
+    static void chooseSortType(Scanner scanner, SubThreadSort sort,SubThreadReverseSort reverseSort){
+        int option = 1;
+        while(true){
+            Methods.printMenu(Constants.sorts);
+            try{
+                option = scanner.nextInt();
+                scanner.nextLine();
+                switch(option){
+                    case 1:  new Thread(sort).start();
+                        System.out.println("Customers were sort by alphabet!");
+                        return;
+                    case 2:  new Thread(reverseSort).start();
+                        System.out.println("Customers were sort by reverse alphabet!");
+                        return;
+                }
+            }catch(Exception ex){
+                System.out.println("Please, entre a value between 1 and " + Constants.types.length);
+                scanner.nextLine();
+            }
+        }
+    }
 
 }
