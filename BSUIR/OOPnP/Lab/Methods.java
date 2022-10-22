@@ -36,17 +36,16 @@ public interface Methods {
 
         System.out.println("Entre a customer's toy amount: ");
         int toyAmount = numberValidation(scanner);
-
+        scanner.nextLine();
         List<Toy> temp = new ArrayList<Toy>();
         
 
         for(int i = 0; i < toyAmount; i++){
-            System.out.println("Entre a size of toy (small, medium, big): ");
-            scanner.nextLine();
-            String size = scanner.nextLine();
+            System.out.println("Choose a size of toy: ");
+            String size = choosingSize(scanner);
 
-            System.out.println("Entre a toy type (cat, dog, dolphin, shark, deer or bear): ");
-            String type = scanner.nextLine();
+            System.out.println("Choose a toy type: ");
+            String type = choosingType(scanner);
 
             for(Toy animal : shop.getAssortment()){
                 if(animal.getSize().equalsIgnoreCase(size) && animal.getType().equalsIgnoreCase(type)){
@@ -54,6 +53,7 @@ public interface Methods {
                 };}
             if(temp.size() == i){
                 System.out.println("Toy wasn't found! Try choose other");
+                i--;
                 continue;
             }
         }
@@ -71,11 +71,11 @@ public interface Methods {
         for(Customer cust:shop.getCustomers()){
             if(cust.getName().equals(name)) {
                 while(true){
-                System.out.println("Entre a size of toy (small, medium, big): ");
-                String size = scanner.nextLine();
+                    System.out.println("Choose a size of toy: ");
+                    String size = choosingSize(scanner);
     
-                System.out.println("Entre a toy type (cat, dog, dolphin, shark, deer or bear): ");
-                String type = scanner.nextLine();
+                    System.out.println("Choose a toy type: ");
+                    String type = choosingType(scanner);
     
                 for(Toy animal : shop.getAssortment()){
                     if(animal.getSize().equalsIgnoreCase(size) && animal.getType().equalsIgnoreCase(type)){
@@ -125,5 +125,50 @@ public interface Methods {
         }
         return temp;
     }
+
+
+
+    static String choosingSize(Scanner scanner){
+        int option = 1;
+        while(true){
+            Methods.printMenu(Constants.sizes);
+            try{
+                option = scanner.nextInt();
+                scanner.nextLine();
+                switch(option){
+                    case 1:  return "small";
+                    case 2:  return "medium";
+                    case 3: return "big";
+                }
+            }catch(Exception ex){
+                System.out.println("Please, entre a value between 1 and " + Constants.sizes.length);
+                scanner.nextLine();
+            }
+        }
+    }
+
+    static String choosingType(Scanner scanner){
+        int option = 1;
+        while(true){
+            Methods.printMenu(Constants.types);
+            try{
+                option = scanner.nextInt();
+                scanner.nextLine();
+                switch(option){
+                    case 1:  return "cat";
+                    case 2:  return "dog";
+                    case 3: return "shark";
+                    case 4: return "dolphin";
+                    case 5: return "bear";
+                    case 6: return "deer";
+                }
+            }catch(Exception ex){
+                System.out.println("Please, entre a value between 1 and " + Constants.types.length);
+                scanner.nextLine();
+            }
+        }
+    }
+    
+
 
 }

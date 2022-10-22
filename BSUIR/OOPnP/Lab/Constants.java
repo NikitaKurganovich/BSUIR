@@ -55,5 +55,25 @@ public class Constants implements Serializable{
         add(KurganovichCart);
     }};
 
-    
+    static String[] options = {
+        "1 - add customer",
+        "2 - print all customer and carts",
+        "3 - add toy to any customer's cart",
+        "4 - all carts sum",
+        "5 - print all assortment",
+        "0 - exit",
+    };
+    static String[] sizes = {
+    "1 - small",
+    "2 - medium",
+    "3 - big",
+    };
+    static String[] types = {
+    "1 - cat",
+    "2 - dog",
+    "3 - shark",
+    "4 - dolphin",
+    "5 - bear",
+    "6 - deer",
+    };
 }

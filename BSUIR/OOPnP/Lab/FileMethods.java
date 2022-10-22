@@ -6,8 +6,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public interface FileMethods {
+public interface FileMethods{
 
+    
     static Shop shopDeserialization(){
         try
         {    

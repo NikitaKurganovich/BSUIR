@@ -5,14 +5,6 @@ import java.io.File;;
 
 public class LabShop{
 
-    static String[] options = {
-    "1 - add customer",
-    "2 - print all customer and carts",
-    "3 - add toy to any customer's cart",
-    "4 - all carts sum",
-    "5 - print all assortment",
-    "0 - exit",
-};
 
     public static void main(String[] args){
         Shop shop;
@@ -24,24 +16,27 @@ public class LabShop{
         }
         shop = FileMethods.shopDeserialization();
 
+        SubThreadSerialize serialize = new SubThreadSerialize(shop);
+
         Scanner scanner = new Scanner(System.in);
         int option = 1;
 
         while(option != 0){
-            Methods.printMenu(options);
+            Methods.printMenu(Constants.options);
             try{
                 option = scanner.nextInt();
                 scanner.nextLine();
                 switch(option){
-                    case 1:  Methods.addCustomer(scanner, shop); 
-                            FileMethods.serializeShop(shop);
+                    case 1: Methods.addCustomer(scanner, shop); 
+                            new Thread(serialize).start();
                             System.out.println(" "); 
                             break;
                     case 2:  shop.printCustomersAndCarts(); 
                             System.out.println(" ");
                             break;
-                    case 3:  Methods.addToyToCustomer(scanner, shop);
-                            FileMethods.serializeShop(shop);
+
+                    case 3: Methods.addToyToCustomer(scanner, shop);
+                            new Thread(serialize).start();
                             System.out.println(" "); 
                             break;
                     case 4:  shop.printCartsPrices();
@@ -54,7 +49,7 @@ public class LabShop{
                 }
             }
             catch(Exception ex){
-                System.out.println("Please, entre a value between 1 and " + options.length);
+                System.out.println("Please, entre a value between 1 and " + Constants.options.length);
                 scanner.nextLine();
             }
         }

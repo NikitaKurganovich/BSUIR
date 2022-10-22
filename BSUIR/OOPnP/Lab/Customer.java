@@ -2,7 +2,7 @@ package BSUIR.OOPnP.Lab;
 
 import java.io.Serializable;
 
-public class Customer implements Serializable{
+public class Customer implements Serializable, Comparable<Customer>{
     private String name;
     private Cart customerCart;
     
@@ -27,4 +27,8 @@ public class Customer implements Serializable{
         this.name = name;
     }
 
+    public int compareTo(Customer customer){
+        int comp = name.compareTo(customer.name);
+        return (comp != 0 ? comp: name.compareTo(customer.name));
+    }
 }
