@@ -3,6 +3,26 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Launch LabStreamApi",
+      "request": "launch",
+      "mainClass": "BSUIR.OOPnP.Lab3.LabStreamApi",
+      "projectName": "BSUIR_557506d9"
+    },
+    {
+      "type": "kotlin",
+      "request": "launch",
+      "name": "Kotlin Launch",
+      "projectRoot": "${workspaceFolder}",
+      "mainClass": ""
+    },
+    {
+      "type": "java",
+      "name": "Launch Java Program",
+      "request": "launch",
+      "mainClass": ""
+    },
+    {
+      "type": "java",
       "name": "Launch LabShop",
       "request": "launch",
       "mainClass": "BSUIR.OOPnP.Lab.LabShop",

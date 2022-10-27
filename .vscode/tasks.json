@@ -20,9 +20,18 @@
             ],
             "group": {
                 "kind": "build",
-                "isDefault": true
+                "isDefault": true,
             }
 
+        },
+        {
+            "label":"Kotlin start",
+            "type": "shell",
+            "command": "kotlinc d${file} -include-runtime -d${fileDirname}.jar",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+        } 
         }
     ]
 }

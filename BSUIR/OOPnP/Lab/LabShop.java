@@ -1,7 +1,7 @@
 package BSUIR.OOPnP.Lab;
 
 import java.util.Scanner;
-import java.io.File;;
+import java.io.File;
 
 public class LabShop{
 
