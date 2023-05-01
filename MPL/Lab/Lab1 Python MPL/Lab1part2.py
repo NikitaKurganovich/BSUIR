@@ -1,6 +1,5 @@
 import pickle
 
-
 FILENAME = "data.data"
 FILENAME2 = "sum.txt"
 with open(FILENAME,"rb") as file:
