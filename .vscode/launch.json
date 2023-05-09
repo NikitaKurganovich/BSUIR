@@ -2,6 +2,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "MPL.Lab.Lab8.Main",
+      "projectName": "BSUIR_557506d9"
+    },
+    {
       "type": "kotlin",
       "request": "launch",
       "name": "Kotlin Launch",
@@ -15,8 +22,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/Bibka/Documents/BSUIR",
-      "program": "c:/Users/Bibka/Documents/BSUIR/build/Debug/outDebug",
+      "cwd": "c:/Users/Bibka/Documents/BSUIR/MPL/Lab/Lab6and7",
+      "program": "c:/Users/Bibka/Documents/BSUIR/MPL/Lab/Lab6and7/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
