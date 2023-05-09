@@ -31,16 +31,25 @@ class main:
 
                 try:
                     denominator2 = int(values["denominator2"])
-                    secondFracrion = Rational(numerator2,denominator2)
-                        
-                    res = firstFracrion.truediv(secondFracrion)
-                        
-                    resNumerator = res.num
-                    resDenominator = res.den
-                        
-                    window['resNumerator'].update(resNumerator)
-                    window['resDenominator'].update(resDenominator)
-                    continue
+                    if denominator2 == 0:
+                        res = firstFracrion.truediv(numerator2) 
+                        resNumerator = res.num
+                        resDenominator = res.den
+                        window['resNumerator'].update(resNumerator)
+                        window['resDenominator'].update(resDenominator) 
+                        window['output'].update("Second fraction will be interpreted as int.")
+                        continue
+                    else:  
+                        secondFracrion = Rational(numerator2,denominator2)
+                            
+                        res = firstFracrion.truediv(secondFracrion)
+                            
+                        resNumerator = res.num
+                        resDenominator = res.den
+                            
+                        window['resNumerator'].update(resNumerator)
+                        window['resDenominator'].update(resDenominator)
+                        continue
                 except ValueError:
                     res = firstFracrion.truediv(numerator2) 
                     resNumerator = res.num
@@ -63,16 +72,25 @@ class main:
 
                 try:
                     denominator2 = int(values["denominator2"])
-                    secondFracrion = Rational(numerator2,denominator2)
-                        
-                    res = firstFracrion.mul(secondFracrion)
-                        
-                    resNumerator = res.num
-                    resDenominator = res.den
-                        
-                    window['resNumerator'].update(resNumerator)
-                    window['resDenominator'].update(resDenominator)
-                    continue
+                    if denominator2 == 0:
+                        res = firstFracrion.mul(numerator2) 
+                        resNumerator = res.num
+                        resDenominator = res.den
+                        window['resNumerator'].update(resNumerator)
+                        window['resDenominator'].update(resDenominator) 
+                        window['output'].update("Second fraction will be interpreted as int.")
+                        continue
+                    else:  
+                        secondFracrion = Rational(numerator2,denominator2)
+                            
+                        res = firstFracrion.mul(secondFracrion)
+                            
+                        resNumerator = res.num
+                        resDenominator = res.den
+                            
+                        window['resNumerator'].update(resNumerator)
+                        window['resDenominator'].update(resDenominator)
+                        continue
                 except ValueError:
                     res = firstFracrion.mul(numerator2) 
                     resNumerator = res.num

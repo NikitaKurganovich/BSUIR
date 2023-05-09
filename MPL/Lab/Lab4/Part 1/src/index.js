@@ -1,4 +1,4 @@
-import { Product } from "Product.js";
+import { Product } from "./Product.js";
 
 let elements = document.querySelectorAll('.element'); //retrieving products from index.html document
 let len = elements.length;
@@ -30,7 +30,7 @@ function startRotate(event){
    (event.offsetX  - halfWidth)/5 + 'deg)'
 }
 
-function stopRotate(_event){
+function stopRotate(event){
     const cardImage = this.querySelector ('.image');
     cardImage.style.transform = 'rotate(0)';
 }
