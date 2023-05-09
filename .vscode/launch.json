@@ -5,8 +5,8 @@
       "type": "kotlin",
       "request": "launch",
       "name": "Kotlin Launch",
-      "projectRoot": "C:\\Users\\Bibka\\Documents\\BSUIR\\Course OOP",
-      "mainClass": "C:\\Users\\Bibka\\Documents\\BSUIR\\Course OOP\\Course.kt"
+      "projectRoot": "${workspaceFolder}",
+      "mainClass": "${workspaceFolder}\\Main.kt"
     },
     {
       "name": "C/C++ Runner: Debug Session",
